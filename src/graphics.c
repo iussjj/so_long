@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_management.c                                :+:      :+:    :+:   */
+/*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 11:40:37 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/06 17:56:19 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/07 17:37:08 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,10 @@ void	draw_graphics(t_data *data, char **map)
 					data->xpos * TILE_SIZE, data->ypos * TILE_SIZE);
 }
 
-void	start_game(t_data *data)
+void	open_window(t_data *data)
 {
 	data->window = mlx_init(data->width * TILE_SIZE,
 					data->height * TILE_SIZE, "Loooong *MAAAANNNN!*", false);
-	data->collected = 0;
-	data->moves = 0;
 	load_images(data);
 	draw_graphics(data, data->map_array);
 }

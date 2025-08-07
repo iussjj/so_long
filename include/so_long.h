@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 20:41:11 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/06 18:27:26 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/07 17:48:13 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,34 @@ typedef struct s_data
 	int		collected;
 }	t_data;
 
-void	close_game(void *param);
+//initialize_data.c
+void	init_data(t_data *data, char *mapfile);
+bool	valid_file_extension(char *string);
+void	read_map_file(t_data *data, char *src);
+bool	valid_map_chars(char **map);
+void	init_map_attributes(t_data *data, char **map);
 
-// window_management.c
+//validate_map.c
+bool	valid_rectangle(char **map);
+bool	valid_enclosed(t_data *data, char **map);
+bool	valid_objects(t_data *data);
+void	flood_fill(int y, int x, char **map);
+void	valid_path(int y, int x, char **map);
+
+//graphics.c
 mlx_image_t	*load_texture(t_data *data, char *filepath);
 void		load_images(t_data *data);
 void		draw_graphics(t_data *data, char **map);
-void		start_game(t_data *data);
+void		open_window(t_data *data);
 
-// user_input.c
+//user_input.c
 void	keypress(mlx_key_data_t pressed_key, void *param);
 void	process_move(t_data *data, size_t x_change, size_t y_change);
 void	move_player(t_data *data, size_t new_x, size_t new_y);
 void	get_collectible(t_data *data, int col_x, int col_y);
 void	check_win(t_data *data);
+
+//clean_exit.c
+void	close_game(void *param);
 
 #endif
