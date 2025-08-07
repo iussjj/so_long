@@ -6,11 +6,14 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 11:40:37 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/07 17:37:08 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/07 21:49:08 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+//write an error function that prints a specified error message -similar to 
+//end game but without the standard exit message!
 
 mlx_image_t	*load_texture(t_data *data, char *filepath)
 {
@@ -26,8 +29,8 @@ mlx_image_t	*load_texture(t_data *data, char *filepath)
 void	load_images(t_data *data)
 {
 	data->wall = load_texture(data, "./assets/wall.png");
-	data->player = load_texture(data, "./assets/player.png");
-	data->collectible = load_texture(data, "./assets/collectible.png");
+	data->player = load_texture(data, "./assets/zombie.png");
+	data->collectible = load_texture(data, "./assets/brain.png");
 	data->exit_closed = load_texture(data, "./assets/exit_closed.png");
 	data->exit_open = load_texture(data, "./assets/exit_open.png");
 }
@@ -67,3 +70,7 @@ void	open_window(t_data *data)
 	load_images(data);
 	draw_graphics(data, data->map_array);
 }
+
+/*
+handle mlx function failures!
+*/

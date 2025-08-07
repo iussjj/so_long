@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 20:41:11 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/07 17:48:13 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:57:38 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ void	get_collectible(t_data *data, int col_x, int col_y);
 void	check_win(t_data *data);
 
 //clean_exit.c
-void	close_game(void *param);
+void	*free_and_nullify(void *willy);
+void	*free_map_array(char **map);
+void	*free_data(t_data *data);
+void	end_game(void *param);
 
 #endif

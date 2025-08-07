@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:26:11 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/07 17:47:02 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/07 20:02:24 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	keypress(mlx_key_data_t pressed_key, void *param)
 		if (pressed_key.key == MLX_KEY_D || pressed_key.key == MLX_KEY_RIGHT)
 			process_move(data, 1, 0);
 		if (pressed_key.key == MLX_KEY_ESCAPE)
-			close_game(param);
+			end_game(param);
 	}
 }
 
@@ -93,6 +93,6 @@ void	check_win(t_data *data)
 	if (data->collected == data->collectibles)
 	{
 		ft_putendl_fd("A winner is you!", 1);
-		exit(0);
+		end_game(data);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 20:27:29 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/07 18:08:17 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:57:58 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	gamedata = calloc(1, sizeof(t_data));
 	init_data(gamedata, argv[1]);
 	open_window(gamedata);
-	mlx_close_hook(gamedata->window, close_game, gamedata);
+	mlx_close_hook(gamedata->window, end_game, gamedata);
 	mlx_key_hook(gamedata->window, keypress, gamedata);
 	mlx_loop(gamedata->window);
 	return(0);
