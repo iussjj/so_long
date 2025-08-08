@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:48:53 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/07 21:44:14 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/08 12:05:55 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	read_map_file(t_data *data, char *src)
 	buffer[bytes_read] = '\0';
 	close(src_fd);
 	output = ft_strdup(buffer);
-	if (!output)
+	//if (!output)
 		//free everything and exit with error msg
 	data->map_array = ft_split(output, '\n');
 	data->map_copy = ft_split(output, '\n');
@@ -57,8 +57,7 @@ bool	valid_map_chars(char **map)
 		{
 			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'P'
 			&& map[i][j] != 'E' && map[i][j] != 'C')
-				//free everything and exit with error message
-				//return (ft_putendl_fd("Error, invalid map characters!", 1), false);
+				return (ft_putendl_fd("Error, invalid map characters!", 1), false);
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 14:22:02 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/05 13:58:59 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/08 11:13:00 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static bool	append_to_output(char *buffer, char **output)
 	return (true);
 }
 
-void	update_buffer(char *buffer)
+static void	update_buffer(char *buffer)
 {
 	char	*next_line_start;
 	size_t	chars_after_newline;

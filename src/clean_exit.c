@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:45:59 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/07 19:57:31 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/08 12:01:39 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	end_game(void *param)
 
 	data = (t_data *)param;
 	data = free_data(data);
-	ft_putendl_fd("So long, and thanks for all the fish!", 1);
+	
+	ft_printf("So long, and thanks for all the fish!");
+	//ft_putendl_fd("So long, and thanks for all the fish!", 1);
 	exit(1);
 }

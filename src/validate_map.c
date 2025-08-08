@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:39:12 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/07 21:48:26 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/08 12:05:15 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ bool	valid_rectangle(char **map)
 	while (map[i])
 	{
 		if (ft_strlen(map[i]) != firstline)
-			//free everything and exit with error message
-            //return (ft_putendl_fd("Error, map not rectangular!", 1), false);
+			return (ft_putendl_fd("Error, map not rectangular!", 1), false);
 		i++;
 	}
 	return (true);
@@ -41,10 +40,9 @@ bool	valid_enclosed(t_data *data, char **map)
 		while (j < data->width)
 		{
 			if ((i == 0 || i == data->height - 1) && map[i][j] != '1')
-				//combine conditions, free everything and exit with error message
-				//return (ft_putendl_fd("Error, map not enclosed!", 1), false);
+				return (ft_putendl_fd("Error, map not enclosed!", 1), false);
 			if ((j == 0 || j == data->width - 1) && map[i][j] != '1')
-				//return (ft_putendl_fd("Error, map not enclosed!", 1), false);
+				return (ft_putendl_fd("Error, map not enclosed!", 1), false);
 			j++;
 		}
 		i++;
@@ -55,14 +53,11 @@ bool	valid_enclosed(t_data *data, char **map)
 bool	valid_objects(t_data *data)
 {
 	if (data->players != 1)
-		//free everything and exit with error message
-		//return (ft_putendl_fd("Error, invalid player count!", 1), false);
+		return (ft_putendl_fd("Error, invalid player count!", 1), false);
 	if (data->exits != 1)
-		//free everything and exit with error message
-		//return (ft_putendl_fd("Error, invalid exit count!", 1), false);
+		return (ft_putendl_fd("Error, invalid exit count!", 1), false);
 	if (data->collectibles == 0)
-		//free everything and exit with error message
-		//return (ft_putendl_fd("Error, invalid collectible count!", 1), false);
+		return (ft_putendl_fd("Error, invalid collectible count!", 1), false);
 	return (true);
 }
 
@@ -89,9 +84,8 @@ void	valid_path(int y, int x, char **map)
 	{
 		if (ft_strchr(map[i], 'C') || ft_strchr(map[i], 'E'))
 		{
-			//free everything and exit with error message
-			//ft_putendl_fd("Error, invalid path!", 1);
-			//exit(0);
+			ft_putendl_fd("Error, invalid path!", 1);
+			exit(0);
 		}
 		i++;
 	}

@@ -39,7 +39,10 @@ SRCS =	ft_atoi.c	\
 		ft_tolower.c \
 		ft_toupper.c \
 		ft_gnl.c \
-		ft_gnl_linelen.c
+		ft_gnl_linelen.c \
+		ft_printf.c \
+		ft_printf_utils.c
+
 
 
 #converts .c files into .o object files

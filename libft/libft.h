@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 19:33:02 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/05 12:23:02 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/08 11:23:57 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ on a 3840 x 2160 px retina display without downsampling
 # include <unistd.h>
 # include <limits.h>
 # include <stdbool.h>
+# include <stdarg.h>
 
 // Main functions
 
@@ -74,5 +75,15 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 
 char	*get_next_line(int fd);
 size_t	gnl_linelen(const char *s);
+
+// Printf
+
+int		ft_printf(const char *format, ...);
+void	output_char(int *counter, unsigned int c);
+void	output_str(int *counter, char *string);
+void	output_unum(int *counter, char *digits, uintptr_t base,
+		uintptr_t number);
+void	output_num(int *counter, char *digits, intptr_t base, intptr_t number);
+void	output_ptr(int *counter, void *pointer);
 
 #endif
