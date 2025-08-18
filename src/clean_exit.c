@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:45:59 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/08 12:01:39 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/18 20:03:02 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,23 @@
 
 void	*free_and_nullify(void *willy)
 {
-	if (willy)
-		free (willy);
-	willy = NULL;
-	return (willy);
+	free (willy);
+	return (NULL);
 }
 
 void	*free_map_array(char **map)
 {
 	int	i;
 
-	if (map)
+	if (!map || !*map)
+		return (NULL);
+	i = 0;
+	while (map[i])
 	{
-			i = 0;
-			while (map[i])
-			{
-				map[i] = free_and_nullify(map[i]);
-				i++;
-			}
-		map = free_and_nullify(map);
+		map[i] = free_and_nullify(map[i]);
+		i++;
 	}
+	map = free_and_nullify(map);
 	return (NULL);
 }
 
@@ -69,8 +66,13 @@ void	end_game(void *param)
 
 	data = (t_data *)param;
 	data = free_data(data);
-	
-	ft_printf("So long, and thanks for all the fish!");
-	//ft_putendl_fd("So long, and thanks for all the fish!", 1);
-	exit(1);
+	ft_putendl_fd(EXIT_MESSAGE, 1);
+	exit(EXIT_SUCCESS);
+}
+
+void	nuke_everything(t_data *data, char *errmsg)
+{
+	free_data(data);
+	ft_putendl_fd(errmsg, 1);
+	exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:39:12 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/08 12:05:15 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/18 20:12:16 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	valid_rectangle(char **map)
 {
-	int	i;
+	int		i;
 	size_t	firstline;
 
 	i = 1;
@@ -22,7 +22,7 @@ bool	valid_rectangle(char **map)
 	while (map[i])
 	{
 		if (ft_strlen(map[i]) != firstline)
-			return (ft_putendl_fd("Error, map not rectangular!", 1), false);
+			return (ft_putendl_fd("Error: map not rectangular!", 1), false);
 		i++;
 	}
 	return (true);
@@ -40,24 +40,38 @@ bool	valid_enclosed(t_data *data, char **map)
 		while (j < data->width)
 		{
 			if ((i == 0 || i == data->height - 1) && map[i][j] != '1')
-				return (ft_putendl_fd("Error, map not enclosed!", 1), false);
+				return (ft_putendl_fd("Error: map not enclosed!", 1), false);
 			if ((j == 0 || j == data->width - 1) && map[i][j] != '1')
-				return (ft_putendl_fd("Error, map not enclosed!", 1), false);
+				return (ft_putendl_fd("Error: map not enclosed!", 1), false);
 			j++;
 		}
 		i++;
 	}
-	return (ft_putendl_fd("Map is enclosed!", 1), true);
+	return (true);
 }
 
 bool	valid_objects(t_data *data)
 {
+	bool	error;
+
+	error = false;
 	if (data->players != 1)
-		return (ft_putendl_fd("Error, invalid player count!", 1), false);
+	{
+		ft_putendl_fd("Error: invalid player count!", 1);
+		error = true;
+	}
 	if (data->exits != 1)
-		return (ft_putendl_fd("Error, invalid exit count!", 1), false);
+	{
+		ft_putendl_fd("Error: invalid exit count!", 1);
+		error = true;
+	}
 	if (data->collectibles == 0)
-		return (ft_putendl_fd("Error, invalid collectible count!", 1), false);
+	{
+		ft_putendl_fd("Error: invalid collectible count!", 1);
+		error = true;
+	}
+	if (error == true)
+		return (false);
 	return (true);
 }
 
@@ -74,7 +88,7 @@ void	flood_fill(int y, int x, char **map)
 		flood_fill(y, x - 1, map);
 }
 
-void	valid_path(int y, int x, char **map)
+bool	valid_path(int y, int x, char **map)
 {
 	int	i;
 
@@ -84,13 +98,10 @@ void	valid_path(int y, int x, char **map)
 	{
 		if (ft_strchr(map[i], 'C') || ft_strchr(map[i], 'E'))
 		{
-			ft_putendl_fd("Error, invalid path!", 1);
-			exit(0);
+			ft_putendl_fd("Error: no possible path on map!", 1);
+			return (false);
 		}
 		i++;
 	}
+	return (true);
 }
-/*
-consider running all possible validations on an unsplit string, before even
-initializing map arrays!
-*/

@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 19:33:02 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/08 11:23:57 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/18 19:51:56 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define LIBFT_H
 
 /*
-BUFFER_SIZE corresponds to the max number of 64 x 64 px tiles that can be displayed
-on a 3840 x 2160 px retina display without downsampling
+BUFFER_SIZE corresponds to the max number of 64 x 64 px tiles that can
+be displayed on a 3840 x 2160 px retina display without downsampling
 */
 
 # ifndef BUFFER_SIZE
@@ -82,8 +82,9 @@ int		ft_printf(const char *format, ...);
 void	output_char(int *counter, unsigned int c);
 void	output_str(int *counter, char *string);
 void	output_unum(int *counter, char *digits, uintptr_t base,
-		uintptr_t number);
-void	output_num(int *counter, char *digits, intptr_t base, intptr_t number);
+			uintptr_t number);
+void	output_num(int *counter, char *digits, intptr_t base,
+			intptr_t number);
 void	output_ptr(int *counter, void *pointer);
 
 #endif

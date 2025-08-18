@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:26:11 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/07 20:02:24 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/18 20:14:02 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	keypress(mlx_key_data_t pressed_key, void *param)
 {
 	t_data	*data;
-	
+
 	data = (t_data *)param;
 	if (pressed_key.action == MLX_PRESS || pressed_key.action == MLX_REPEAT)
 	{
@@ -37,12 +37,12 @@ void	process_move(t_data *data, size_t x_change, size_t y_change)
 	size_t	new_x;
 	size_t	new_y;
 	char	moveto;
-	
+
 	new_x = data->xpos + x_change;
 	new_y = data->ypos + y_change;
 	moveto = data->map_array[new_y][new_x];
-	if	(moveto == '1')
-		return;
+	if (moveto == '1')
+		return ;
 	move_player(data, new_x, new_y);
 	if (data->map_array[new_y][new_x] == 'C')
 		get_collectible(data, new_x, new_y);
@@ -65,7 +65,7 @@ void	move_player(t_data *data, size_t new_x, size_t new_y)
 void	get_collectible(t_data *data, int col_x, int col_y)
 {
 	int	i;
-	
+
 	data->map_array[col_y][col_x] = '0';
 	i = 0;
 	while (i < data->collectibles)
@@ -74,16 +74,18 @@ void	get_collectible(t_data *data, int col_x, int col_y)
 			&& data->collectible->instances[i].y == col_y * TILE_SIZE)
 		{
 			data->collectible->instances[i].enabled = false;
-			break;
+			break ;
 		}
-		i++;	
+		i++;
 	}
 	data->collected++;
 	if (data->collected == data->collectibles)
 	{
 		data->exit_closed->instances->enabled = false;
-		mlx_image_to_window(data->window, data->exit_open, data->exit_closed->instances->x,
-							data->exit_closed->instances->y);
+		if (mlx_image_to_window(data->window, data->exit_open,
+				data->exit_closed->instances->x,
+				data->exit_closed->instances->y) < 0)
+			nuke_everything(data, ERROR_DRAW);
 		data->player->instances[0].z = data->exit_open->instances[0].z + 1;
 	}
 }
@@ -92,7 +94,7 @@ void	check_win(t_data *data)
 {
 	if (data->collected == data->collectibles)
 	{
-		ft_putendl_fd("A winner is you!", 1);
+		ft_putendl_fd(WIN_MESSAGE, 1);
 		end_game(data);
 	}
 }
