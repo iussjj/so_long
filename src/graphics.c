@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 11:40:37 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/18 20:04:34 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/18 21:14:26 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	draw_graphics(t_data *data, char **map)
 	while (y < data->height)
 	{
 		x = 0;
-		while (x < data->height)
+		while (x < data->width)
 		{
 			if (map[y][x] == '1')
 				draw_instance(data, data->wall, x, y);

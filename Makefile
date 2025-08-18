@@ -1,10 +1,10 @@
-NAME	:= tosi_pitka
+NAME	:= so_long
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
 LIBMLX	:= ./lib/MLX42
-LIBFT	:= ./libft
+LIBFT	:= ./lib/libft
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)
-LIBS	:= $(LIBMLX)/build/libmlx42.a $(LIBFT)/libft.a -ldl -lglfw -pthread -lm
+LIBS    := $(LIBMLX)/build/libmlx42.a $(LIBFT)/libft.a -ldl -lglfw -pthread -lm
 SRCS	:= $(shell find ./src -iname "*.c")
 OBJS	:= ${SRCS:.c=.o}
 
@@ -14,7 +14,7 @@ libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 libft:
-	@$(MAKE) -C libft
+	@$(MAKE) -C $(LIBFT)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
@@ -25,11 +25,11 @@ $(NAME): $(OBJS)
 clean:
 	@rm -rf $(OBJS)
 	@rm -rf $(LIBMLX)/build
-	@make -C libft clean
+	@make -C $(LIBFT) clean
 
 fclean: clean
 	@rm -rf $(NAME)
-	@make -C libft fclean
+	@make -C $(LIBFT) fclean
 
 re: fclean all
 

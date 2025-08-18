@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:48:53 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/18 20:05:49 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/18 22:03:32 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,12 @@ void	read_map_file(t_data *data, char *src)
 	close(src_fd);
 	output = ft_strdup(buffer);
 	if (!output)
-	{
-		ft_putendl_fd(ERROR_MALLOC, 1);
-		exit(EXIT_FAILURE);
-	}
+		nuke_everything(data, ERROR_MALLOC);
 	data->map_array = ft_split(output, '\n');
 	data->map_copy = ft_split(output, '\n');
 	free(output);
 	if (!data->map_array || !data->map_copy)
-	{
-		free_data(data);
-		ft_putendl_fd(ERROR_MALLOC, 1);
-		exit(EXIT_FAILURE);
-	}
+		nuke_everything(data, ERROR_MALLOC);
 }
 
 void	valid_map_chars(t_data *data, char **map)
@@ -67,11 +60,7 @@ void	valid_map_chars(t_data *data, char **map)
 		{
 			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'P'
 			&& map[i][j] != 'E' && map[i][j] != 'C')
-			{
-				free_data(data);
-				ft_putendl_fd(ERROR_CHARS, 1);
-				exit(EXIT_FAILURE);
-			}
+				nuke_everything(data, ERROR_CHARS);
 			j++;
 		}
 		i++;
@@ -112,7 +101,7 @@ void	init_data(t_data *data, char *mapfile)
 	read_map_file(data, mapfile);
 	valid_map_chars(data, data->map_array);
 	init_map_attributes(data, data->map_array);
-	if (!valid_rectangle(data->map_array)
+	if (!valid_shape(data->map_array)
 		|| !valid_enclosed(data, data->map_array)
 		|| !valid_objects(data)
 		|| !valid_path(data->ypos, data->xpos, data->map_copy))

@@ -6,25 +6,31 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:39:12 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/18 20:12:16 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/18 22:03:12 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-bool	valid_rectangle(char **map)
+bool	valid_shape(char **map)
 {
 	int		i;
 	size_t	firstline;
+	bool	rectangular;
 
 	i = 1;
 	firstline = ft_strlen(map[0]);
+	rectangular = true;
 	while (map[i])
 	{
 		if (ft_strlen(map[i]) != firstline)
-			return (ft_putendl_fd("Error: map not rectangular!", 1), false);
+			rectangular = false;
 		i++;
 	}
+	if (firstline > 60 || i > 32)
+		return (ft_putendl_fd("Error: map over max size of 60 x 32", 1), false);
+	if (!rectangular)
+		return (ft_putendl_fd("Error: map not rectangular!", 1), false);
 	return (true);
 }
 

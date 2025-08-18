@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 20:41:11 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/18 20:01:54 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/18 22:10:01 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,39 +59,38 @@ typedef struct s_data
 }	t_data;
 
 //initialize_data.c
-void	init_data(t_data *data, char *mapfile);
-bool	valid_file_extension(char *string);
-void	read_map_file(t_data *data, char *src);
-void	valid_map_chars(t_data *data, char **map);
-void	init_map_attributes(t_data *data, char **map);
+void		init_data(t_data *data, char *mapfile);
+bool		valid_file_extension(char *string);
+void		read_map_file(t_data *data, char *src);
+void		valid_map_chars(t_data *data, char **map);
+void		init_map_attributes(t_data *data, char **map);
 
 //validate_map.c
-bool	valid_rectangle(char **map);
-bool	valid_enclosed(t_data *data, char **map);
-bool	valid_objects(t_data *data);
-void	flood_fill(int y, int x, char **map);
-bool	valid_path(int y, int x, char **map);
+bool		valid_shape(char **map);
+bool		valid_enclosed(t_data *data, char **map);
+bool		valid_objects(t_data *data);
+void		flood_fill(int y, int x, char **map);
+bool		valid_path(int y, int x, char **map);
 
 //graphics.c
-void	load_images(t_data *data);
-void	draw_instance(t_data *data, mlx_image_t *asset, int xpos, int ypos);
-void	draw_graphics(t_data *data, char **map);
-void	open_window(t_data *data);
+mlx_image_t	*load_texture(t_data *data, char *filepath);
+void		load_images(t_data *data);
+void		draw_instance(t_data *data, mlx_image_t *asset, int xpos, int ypos);
+void		draw_graphics(t_data *data, char **map);
+void		open_window(t_data *data);
 
 //user_input.c
-void	keypress(mlx_key_data_t pressed_key, void *param);
-void	process_move(t_data *data, size_t x_change, size_t y_change);
-void	move_player(t_data *data, size_t new_x, size_t new_y);
-void	get_collectible(t_data *data, int col_x, int col_y);
-void	check_win(t_data *data);
+void		keypress(mlx_key_data_t pressed_key, void *param);
+void		process_move(t_data *data, size_t x_change, size_t y_change);
+void		move_player(t_data *data, size_t new_x, size_t new_y);
+void		get_collectible(t_data *data, int col_x, int col_y);
+void		check_win(t_data *data);
 
 //clean_exit.c
-void	*free_and_nullify(void *willy);
-void	*free_map_array(char **map);
-void	*free_data(t_data *data);
-void	end_game(void *param);
-void	nuke_everything(t_data *data, char *errmsg);
-
-mlx_image_t	*load_texture(t_data *data, char *filepath);
+void		*free_and_nullify(void *willy);
+void		*free_map_array(char **map);
+void		*free_data(t_data *data);
+void		end_game(void *param);
+void		nuke_everything(t_data *data, char *errmsg);
 
 #endif
