@@ -6,65 +6,51 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:48:53 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/18 22:03:32 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/20 21:43:47 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-bool	valid_file_extension(char *string)
-{
-	int	last_index;
-
-	if (ft_strlen(string) < 5)
-		return (false);
-	last_index = ft_strlen(string) - 1;
-	if (string[last_index] == 'r' && string[last_index - 1] == 'e'
-		&& string[last_index - 2] == 'b' && string[last_index - 3] == '.')
-		return (true);
-	else
-		return (false);
-}
-
-void	read_map_file(t_data *data, char *src)
-{
-	char	buffer[BUFFER_SIZE + 1];
-	char	*output;
-	size_t	src_fd;
-	size_t	bytes_read;
-
-	src_fd = open(src, O_RDONLY);
-	bytes_read = read(src_fd, buffer, BUFFER_SIZE);
-	buffer[bytes_read] = '\0';
-	close(src_fd);
-	output = ft_strdup(buffer);
-	if (!output)
-		nuke_everything(data, ERROR_MALLOC);
-	data->map_array = ft_split(output, '\n');
-	data->map_copy = ft_split(output, '\n');
-	free(output);
-	if (!data->map_array || !data->map_copy)
-		nuke_everything(data, ERROR_MALLOC);
-}
-
-void	valid_map_chars(t_data *data, char **map)
+bool	valid_map_chars(char *map)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (map[i])
+	while (map[i] != '\0')
 	{
-		j = 0;
-		while (map[i][j] != '\0')
-		{
-			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'P'
-			&& map[i][j] != 'E' && map[i][j] != 'C')
-				nuke_everything(data, ERROR_CHARS);
-			j++;
-		}
+		if (map[i] != '1' && map[i] != '0' && map[i] != 'P'
+			&& map[i] != 'E' && map[i] != 'C' && map[i] != '\n')
+			return (false);
 		i++;
 	}
+	return (true);
+}
+
+bool	map_contiguous(char *map)
+{
+	int		i;
+	bool	empty_nl;
+
+	i = 0;
+	empty_nl = false;
+	while (map[i] != '\0')
+	{
+		if (map[i] == '\n' && map[i - 1] == '\n')
+			empty_nl = true;
+		if (empty_nl && map[i] != '\n')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+void	init_map_arrays(t_data *data, char *map)
+{
+	data->map_array = ft_split(map, '\n');
+	data->map_copy = ft_split(map, '\n');
+	if (!data->map_array || !data->map_copy)
+		nuke_everything(data, ERROR_MALLOC);
 }
 
 void	init_map_attributes(t_data *data, char **map)
@@ -96,17 +82,20 @@ void	init_map_attributes(t_data *data, char **map)
 	data->height = i;
 }
 
-void	init_data(t_data *data, char *mapfile)
+void	init_data(t_data *data)
 {
-	read_map_file(data, mapfile);
-	valid_map_chars(data, data->map_array);
+	if (!valid_map_chars(data->source_string))
+		nuke_everything(data, ERROR_CHARS);
+	if (!map_contiguous(data->source_string))
+		nuke_everything(data, ERROR_CONT);
+	init_map_arrays(data, data->source_string);
 	init_map_attributes(data, data->map_array);
-	if (!valid_shape(data->map_array)
-		|| !valid_enclosed(data, data->map_array)
-		|| !valid_objects(data)
-		|| !valid_path(data->ypos, data->xpos, data->map_copy))
-	{
-		free_data(data);
-		exit(EXIT_FAILURE);
-	}
+	if (!valid_rect(data->map_array))
+		nuke_everything(data, ERROR_RECT);
+	if (!valid_enclosed(data, data->map_array))
+		nuke_everything(data, ERROR_ENCLOSED);
+	if (!valid_objects(data))
+		nuke_everything(data, ERROR_OBJ);
+	if (!valid_path(data->ypos, data->xpos, data->map_copy))
+		nuke_everything(data, ERROR_PATH);
 }

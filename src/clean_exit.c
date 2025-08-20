@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:45:59 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/18 20:03:02 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/20 20:46:01 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	*free_data(t_data *data)
 {
 	if (!data)
 		return (NULL);
+	if ((data->source_string))
+		data->source_string = free_and_nullify(data->source_string);
 	if (data->map_array)
 		data->map_array = free_map_array(data->map_array);
 	if (data->map_copy)
@@ -52,8 +54,6 @@ void	*free_data(t_data *data)
 		mlx_delete_image(data->window, data->exit_open);
 	if (data->wall)
 		mlx_delete_image(data->window, data->wall);
-	if (data->bg)
-		mlx_delete_image(data->window, data->bg);
 	if (data->window)
 		mlx_terminate(data->window);
 	free (data);
@@ -73,6 +73,6 @@ void	end_game(void *param)
 void	nuke_everything(t_data *data, char *errmsg)
 {
 	free_data(data);
-	ft_putendl_fd(errmsg, 1);
+	ft_putendl_fd(errmsg, 2);
 	exit(EXIT_FAILURE);
 }

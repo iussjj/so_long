@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 19:33:02 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/18 21:39:31 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/20 17:17:05 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ top window edge), plus 1 extra char per row for \n characters
 */
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1952
+#  define BUFFER_SIZE 10000
 # endif
 
 // Libraries

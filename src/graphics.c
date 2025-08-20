@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 11:40:37 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/18 21:14:26 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/20 20:52:34 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ mlx_image_t	*load_texture(t_data *data, char *filepath)
 	mlx_image_t		*image;
 
 	texture = mlx_load_png(filepath);
+	if (!texture)
+		nuke_everything(data, ERROR_IMAGE);
 	image = mlx_texture_to_image(data->window, texture);
 	mlx_delete_texture(texture);
 	if (!image)
@@ -68,7 +70,7 @@ void	draw_graphics(t_data *data, char **map)
 void	open_window(t_data *data)
 {
 	data->window = mlx_init(data->width * TILE_SIZE,
-			data->height * TILE_SIZE, TITLE, false);
+			data->height * TILE_SIZE, TITLE, true);
 	if (!data->window)
 		nuke_everything(data, ERROR_WINDOW);
 	load_images(data);

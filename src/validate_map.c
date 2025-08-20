@@ -6,31 +6,25 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:39:12 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/18 22:03:12 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/20 19:55:01 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-bool	valid_shape(char **map)
+bool	valid_rect(char **map)
 {
 	int		i;
 	size_t	firstline;
-	bool	rectangular;
 
 	i = 1;
 	firstline = ft_strlen(map[0]);
-	rectangular = true;
 	while (map[i])
 	{
 		if (ft_strlen(map[i]) != firstline)
-			rectangular = false;
+			return (false);
 		i++;
 	}
-	if (firstline > 60 || i > 32)
-		return (ft_putendl_fd("Error: map over max size of 60 x 32", 1), false);
-	if (!rectangular)
-		return (ft_putendl_fd("Error: map not rectangular!", 1), false);
 	return (true);
 }
 
@@ -46,9 +40,9 @@ bool	valid_enclosed(t_data *data, char **map)
 		while (j < data->width)
 		{
 			if ((i == 0 || i == data->height - 1) && map[i][j] != '1')
-				return (ft_putendl_fd("Error: map not enclosed!", 1), false);
+				return (false);
 			if ((j == 0 || j == data->width - 1) && map[i][j] != '1')
-				return (ft_putendl_fd("Error: map not enclosed!", 1), false);
+				return (false);
 			j++;
 		}
 		i++;
@@ -58,25 +52,11 @@ bool	valid_enclosed(t_data *data, char **map)
 
 bool	valid_objects(t_data *data)
 {
-	bool	error;
-
-	error = false;
 	if (data->players != 1)
-	{
-		ft_putendl_fd("Error: invalid player count!", 1);
-		error = true;
-	}
+		return (false);
 	if (data->exits != 1)
-	{
-		ft_putendl_fd("Error: invalid exit count!", 1);
-		error = true;
-	}
+		return (false);
 	if (data->collectibles == 0)
-	{
-		ft_putendl_fd("Error: invalid collectible count!", 1);
-		error = true;
-	}
-	if (error == true)
 		return (false);
 	return (true);
 }
@@ -103,10 +83,7 @@ bool	valid_path(int y, int x, char **map)
 	while (map[i])
 	{
 		if (ft_strchr(map[i], 'C') || ft_strchr(map[i], 'E'))
-		{
-			ft_putendl_fd("Error: no possible path on map!", 1);
 			return (false);
-		}
 		i++;
 	}
 	return (true);
