@@ -6,22 +6,15 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 19:33:02 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/20 17:17:05 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/21 16:56:25 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-/*
-BUFFER_SIZE corresponds to the max map size in my so_long implementation:
-61 * 32 (the largest number of 64 x 64 px tiles that can be displayed on
-a 3840 x 2160 px retina display without downsampling (with margin for
-top window edge), plus 1 extra char per row for \n characters
-*/
-
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10000
+#  define BUFFER_SIZE 1000000
 # endif
 
 // Libraries

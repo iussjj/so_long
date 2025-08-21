@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 20:27:29 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/20 20:19:00 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/21 16:53:03 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	main(int argc, char **argv)
 {
 	t_data	*gamedata;
 
-	if (argc != 2)
+	if (argc != 2 || argv[1][0] == '\0')
 		return (ft_putendl_fd(ERROR_ARGC, 2), EXIT_FAILURE);
 	if (!(valid_file_extension(argv[1])))
 		return (ft_putendl_fd(ERROR_FILETYPE, 2), EXIT_FAILURE);

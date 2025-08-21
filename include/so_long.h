@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 20:41:11 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/20 20:45:51 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/21 17:17:39 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@
 # include <fcntl.h>
 # include "MLX42/MLX42.h"
 
-# define MAXWIDTH 3840
-# define MAXHEIGHT 2160
 # define TILE_SIZE 64
-# define TITLE "Son moro!"
+# define TITLE "So long!"
 
 # define ERROR_FILETYPE "Error\nInvalid map filetype"
 # define ERROR_OPEN "Error\nCould not open map file, or it does not exist"
@@ -33,7 +31,6 @@
 # define ERROR_DRAW "Error\nFailed to display graphics"
 # define ERROR_MALLOC "Error\nMemory allocation failed"
 # define ERROR_CONT "Error\nMap not contiguous"
-
 # define ERROR_RECT "Error\nMap not rectangular"
 # define ERROR_ENCLOSED "Error\nMap not enclosed"
 # define ERROR_OBJ "Error\nMap must contain 1 player, 1 exit and at least 1 collectible"
