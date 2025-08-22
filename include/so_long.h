@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 20:41:11 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/21 17:17:39 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/22 15:35:08 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define ERROR_FILETYPE "Error\nInvalid map filetype"
 # define ERROR_OPEN "Error\nCould not open map file, or it does not exist"
 # define ERROR_READ "Error\nCould not read map file"
+# define ERROR_BIGMAP "Error\nMap file too large"
 # define ERROR_EMPTY "Error\nEmpty map file"
 # define ERROR_ARGC "Error\nPlease input one map file"
 # define ERROR_CHARS "Error\nMap file contains invalid characters"
@@ -33,8 +34,10 @@
 # define ERROR_CONT "Error\nMap not contiguous"
 # define ERROR_RECT "Error\nMap not rectangular"
 # define ERROR_ENCLOSED "Error\nMap not enclosed"
-# define ERROR_OBJ "Error\nMap must contain 1 player, 1 exit and at least 1 collectible"
+# define ERROR_OBJ "Error\nMap must have 1 player, 1 exit and >= 1 collectible"
 # define ERROR_PATH "Error\nNo possible path on map"
+
+# define WARNING_BIGMAP "Warning\nMap size should be max 60 X 32"
 
 # define WIN_MESSAGE "A winner is you!"
 # define EXIT_MESSAGE "So long, and thanks for all the fish!"

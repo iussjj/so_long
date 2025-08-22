@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 20:27:29 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/21 16:53:03 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/22 14:53:14 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char	*read_map_file(t_data *data, char *src)
 	if (src_fd == -1)
 		nuke_everything(data, ERROR_OPEN);
 	bytes_read = read(src_fd, buffer, BUFFER_SIZE);
+	if (bytes_read == BUFFER_SIZE)
+		nuke_everything(data, ERROR_BIGMAP);
 	if (bytes_read == -1)
 		nuke_everything(data, ERROR_READ);
 	if (bytes_read == 0)
@@ -57,7 +59,7 @@ int	main(int argc, char **argv)
 		return (ft_putendl_fd(ERROR_ARGC, 2), EXIT_FAILURE);
 	if (!(valid_file_extension(argv[1])))
 		return (ft_putendl_fd(ERROR_FILETYPE, 2), EXIT_FAILURE);
-	gamedata = calloc(1, sizeof(t_data));
+	gamedata = ft_calloc(1, sizeof(t_data));
 	if (!gamedata)
 		return (ft_putendl_fd(ERROR_MALLOC, 2), EXIT_FAILURE);
 	gamedata->source_string = read_map_file(gamedata, argv[1]);

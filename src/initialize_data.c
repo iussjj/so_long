@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:48:53 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/20 21:43:47 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/22 14:56:05 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	init_data(t_data *data)
 		nuke_everything(data, ERROR_CONT);
 	init_map_arrays(data, data->source_string);
 	init_map_attributes(data, data->map_array);
+	if (data->width > 60 || data->height > 32)
+		ft_putendl_fd(WARNING_BIGMAP, 1);
 	if (!valid_rect(data->map_array))
 		nuke_everything(data, ERROR_RECT);
 	if (!valid_enclosed(data, data->map_array))

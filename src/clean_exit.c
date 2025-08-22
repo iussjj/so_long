@@ -6,7 +6,7 @@
 /*   By: jjahkola <jjahkola@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:45:59 by jjahkola          #+#    #+#             */
-/*   Updated: 2025/08/20 20:46:01 by jjahkola         ###   ########.fr       */
+/*   Updated: 2025/08/22 15:21:33 by jjahkola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*free_and_nullify(void *willy)
 {
-	free (willy);
+	free(willy);
 	return (NULL);
 }
 
